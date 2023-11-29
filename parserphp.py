@@ -19,6 +19,13 @@ def p_valor(p):
 	         | BOOLEAN
 	'''
 
+def p_operadores(p):
+   '''operadores : OPERADOR
+	         | AND
+	         | OR
+	'''
+
+
 # Asignacion
 def p_asignacion(p):
     '''asignacion : IDENTIFICADOR ASIGNAR valor'''

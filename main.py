@@ -7,7 +7,7 @@ reservadas = {
   'print': 'PRINT',
   'switch':'SWITCH',
   'case': 'CASE',
-  'SplStack':'STACK',
+  'stack':'STACK',
   # Fin Meiyin Chang 
 
   # Inicio Diego Martinez
@@ -15,7 +15,7 @@ reservadas = {
   'if': 'IF', 
   'else': 'ELSE',
   'SplQueue' : 'QUEUE',
-
+  'elseif':'ELSEIF',
   # Fin Diego Martinez
 
   # Inicio Irving Macias
@@ -25,7 +25,7 @@ reservadas = {
   'array':'ARRAY',
   # Fin Irving Macias
  
-  #'elseif':'ELSEIF',
+  
   #'exit': 'EXIT',
   #'push' : 'PUSH',
   #'pop' : 'POP',
@@ -69,6 +69,7 @@ tokens = (
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
+  'IGUAL',
   'MENORQUE',
   'MENORIGUALQUE',
   'DOSPUNTOS',
@@ -135,18 +136,15 @@ t_SIGNOID = r'\$'
 
 # Inicio Meiyin Chang
 
+
 def t_OPERADOR(t):
-    r'and|or'
+    r'and|or|AND|OR'
     return t
 
 def t_BOOLEAN(t):
     r'True|False'
     return t
 
-def t_IDENTIFICADOR(t):
-  r'\$?[a-zA-Z_]\w*'
-  t.type = reservadas.get(t.value,'IDENTIFICADOR')
-  return t
 
 def t_FLOTANTE(t):
   r'\d+\.\d+'
@@ -165,6 +163,17 @@ def t_CADENA(t):
 def t_COMENTARIO(t):
     r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
     return t
+
+def t_NAMEFUNCTION(t):
+    r'([a-zA-Z_]\w*)(?=\()'
+    t.type = reservadas.get(t.value, "NAMEFUNCTION")
+    return t
+
+def t_IDENTIFICADOR(t):
+  r'\$?[a-zA-Z_]\w*'
+  t.type = reservadas.get(t.value,'IDENTIFICADOR')
+  return t
+
 
 
 
