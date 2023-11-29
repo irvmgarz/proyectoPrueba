@@ -73,3 +73,57 @@ def p_operadorAritmetico(p):
 						  | POTENCIA
 	'''
 
+#Inicio Diego Martinez
+
+#FUNCIONES
+#declaracion de una funcion
+def p_declaracion_funcion(p):
+    "funcion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZQ"
+# function sumar($numero1, $numero2) {
+
+
+#Declaracion de un parametro
+def p_parametro(p):
+   '''parametro : IDENTIFICADOR
+                | IDENTIFICADOR COMA parametro
+'''
+
+#llamada a una funcion
+def p_llamada_funcion(p):
+    ''' funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOYCOMA
+                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER SEMICOLON
+'''
+
+# return 
+def p_return(p):
+  " return : RETURN IDENTIFICADOR PUNTOYCOMA"
+#return $resultado;
+
+# sumar($valor1, $valor2);
+# $suma = sumar($valor1, $valor2);
+                
+#Fin de Diego Martinez
+
+def p_error(p):
+    try:
+        if p:
+            print(f"Error de sintaxis en la línea {p.lineno}, posición {p.lexpos}: Token inesperado '{p.value}'")
+        else:
+            print("Error de sintaxis: entrada inesperada al final del archivo")
+    except Exception as e:
+        # Manejar cualquier excepción no esperada y mostrar un mensaje genérico
+        print(f"Error inesperado: {str(e)}")
+
+
+# Build the parser
+parser = sint.yacc()
+
+while True:
+  try:
+    s = input('prueba > ')
+    #s = code_meiyin
+  except EOFError:
+    break
+  if not s: continue
+  result = parser.parse(s)
+  print(result)
