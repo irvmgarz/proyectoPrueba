@@ -11,14 +11,19 @@ def p_valores(p):
   '''valores : valor
             | valor COMMA valores'''
 
-
+def p_numero(p):
+  '''NUMERO : ENTERO
+            | FLOTANTE
+  '''
 def p_valor(p):
-    '''valor : ENTERO
-	         | FLOTANTE
+    '''valor : NUMERO
 	         | CADENA
 	         | BOOLEAN
+           | IDENTIFICADOR
 	'''
-
+def p_echo(p):
+  '''ECHO : ECHO valores PUNTOCOMA
+  '''
 def p_operadores(p):
    '''operadores : OPERADOR
 	         | AND
