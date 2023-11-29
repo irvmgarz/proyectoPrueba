@@ -19,11 +19,26 @@ def p_valor(p):
     '''valor : NUMERO
 	         | CADENA
 	         | BOOLEAN
-           | IDENTIFICADOR
+             | IDENTIFICADOR
+	'''
+def p_comparacionNum(p):
+	''' comparacion : MAYORQUE
+					| MAYORIGUALQUE
+					| MENORQUE
+					| MENORIGUALQUE
+					| IDENTICO
+					| NOIDENTICO
+					| IGUAL
+	'''
+def p_comparaciones(p):
+	''' comparaciones : valor comparacion valor
 	'''
 def p_echo(p):
   '''ECHO : ECHO valores PUNTOCOMA
   '''
+def p_while(p):
+	''' WHILE : WHILE 
+	'''
 def p_operadores(p):
    '''operadores : OPERADOR
 	         | AND
