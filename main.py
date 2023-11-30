@@ -15,6 +15,7 @@ reservadas = {
   'current' : 'CURRENT',
   'next' : 'NEXT',
   'foreach' : 'FOREACH',
+  'as' : 'AS',
   # Fin Meiyin Chang 
 
   # Inicio Diego Martinez
@@ -37,7 +38,8 @@ reservadas = {
   'while': 'WHILE', 
   'for': 'FOR',
   'array':'ARRAY',
-  'break' : 'BREAK'
+  'break' : 'BREAK',
+  'default': 'DEFAULT',
   # Fin Irving Macias
 
 }

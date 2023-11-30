@@ -73,6 +73,12 @@ def p_for(p):
   '''
 #for ($i = 2; $i <= 10; $i + 2) {
 
+
+def p_foreach(p):
+  ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
+#foreach ($numeros as $numero) {
+
+
 def p_if(p):
   ''' if : IF PARENIZ comparaciones PARENDER LLAVEIZ
           | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
@@ -162,6 +168,7 @@ def p_estructurasControl(p):
   '''estructurasControl : while
                         | for
                         | if
+                        | foreach
   '''
 
 #QUEUE
