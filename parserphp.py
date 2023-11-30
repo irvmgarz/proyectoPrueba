@@ -13,6 +13,7 @@ def p_sentencias(p):
                   | return 
                   | estructurasDeDatos
                   | estructurasControl
+                  | operaciones
                   '''
 
 def p_valores(p):
@@ -42,7 +43,7 @@ def p_comparador(p):
 	'''
     
 def p_variableOperacion(p):
-    ''' variables : NUMERO
+    ''' variable : NUMERO
                   | IDENTIFICADOR
     '''
 
@@ -52,7 +53,7 @@ def p_comparaciones(p):
 	'''
 
 def p_comparacion(p):
-	''' comparacion :  variables comparadorNum variables 
+	''' comparacion :  variable comparadorNum variable 
             | valor comparador valor 
 	'''
 
@@ -71,6 +72,16 @@ def p_operadores(p):
 	'''
 
 # Operaciones aritmeticas
+
+def p_operaciones(p):
+   ''' operaciones : operacion
+                    | operacion operadorAritmetico operaciones 
+                    | IDENTIFICADOR ASIGNAR operaciones'''
+
+def p_operacionAritmentica(p):
+   ''' operacion : variable operadorAritmetico variable
+   '''
+
 def p_operadorAritmetico(p):
     '''operadorAritmetico : SUMA
 						  | RESTA
@@ -80,7 +91,7 @@ def p_operadorAritmetico(p):
 						  | MODULO
 						  | POTENCIA
 	'''
-
+    
 # Asignacion
 def p_asignacion(p):
     '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA'''
