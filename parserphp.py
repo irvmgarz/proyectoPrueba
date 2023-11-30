@@ -40,11 +40,17 @@ def p_comparador(p):
 					| NOIDENTICO
 					| IGUAL
 	'''
+    
+def p_variableOperacion(p):
+    ''' variables : NUMERO
+                  | IDENTIFICADOR
+    '''
 
 def p_comparacion(p):
-	''' comparacion : valor comparador valor 
-					 | NUMERO comparadorNum NUMERO 
+	''' comparacion :  variables comparadorNum variables 
+            | valor comparador valor 
 	'''
+
 
 def p_comparaciones(p):
 	''' comparaciones : comparacion  
@@ -57,7 +63,7 @@ def p_echo(p):
 
 # FALTA ARGUMENTOOOOOOS
 def p_while(p):
-	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ  LLAVEDER 
+	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
 	'''
 
 def p_operadores(p):

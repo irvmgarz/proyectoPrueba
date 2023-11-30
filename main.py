@@ -265,6 +265,7 @@ and
 ->
 HOLA
 name()
+while ($contador <= 5) {
 '''
 
 # Enviando el código
