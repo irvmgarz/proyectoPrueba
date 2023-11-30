@@ -7,7 +7,13 @@ reservadas = {
   'print': 'PRINT',
   'switch':'SWITCH',
   'case': 'CASE',
-  'stack':'STACK',
+  'splstack':'SPLSTACK',
+  'push' : 'PUSH',
+  'pop' : 'POP',
+  'rewind' : 'REWIND',
+  'valid' : 'VALID',
+  'current' : 'CURRENT',
+  'next' : 'NEXT',
   # Fin Meiyin Chang 
 
   # Inicio Diego Martinez
@@ -16,6 +22,8 @@ reservadas = {
   'else': 'ELSE',
   'SplQueue' : 'QUEUE',
   'elseif':'ELSEIF',
+  'return' : 'RETURN',
+  'namefunction' : 'NAMEFUNCTION',
   # Fin Diego Martinez
 
   # Inicio Irving Macias
@@ -24,15 +32,7 @@ reservadas = {
   'for': 'FOR',
   'array':'ARRAY',
   # Fin Irving Macias
- 
-  
-  #'exit': 'EXIT',
-  #'push' : 'PUSH',
-  #'pop' : 'POP',
-  
-  #EXTRAS TODOS
-  'return' : 'RETURN',
-  'namefunction' : 'NAMEFUNCTION',
+
 }
 
 
@@ -76,11 +76,11 @@ tokens = (
   'COMENTARIO',
   'MODULO',
   'DIVISIONENTERA',
-  'FLECHA',
   'BOOLEAN',
   'CADENA',
   'AND',
   'OR',
+  'FLECHASIMPLE',
   'CORCHETEIZ',
   'CORCHETEDER',
   'DIVISION', 
@@ -99,8 +99,6 @@ t_IDENTICO = r'==='
 t_NOIDENTICO = r'\!=='
 t_LLAVEIZ = r'\{'
 t_LLAVEDER = r'\}'
-t_CORCHETEIZ = r'\['
-t_CORCHETEDER = r'\]'
 #Fin Irving Macias
 
 
@@ -115,6 +113,8 @@ t_PUNTOCOMA = r';'
 t_ANDEQUAL = r'&='
 t_COMA = r','
 t_PUNTO = r'\.'
+t_CORCHETEIZ = r'\['
+t_CORCHETEDER = r'\]'
 #Fin Diego Martinez
 
 # Inicio Meiyin Chang
@@ -125,7 +125,7 @@ t_MENORIGUALQUE = r'<='
 t_DOSPUNTOS = r':'
 t_MODULO = r'%'
 t_DIVISIONENTERA = r'//'
-t_FLECHA = r'=\>'
+t_FLECHASIMPLE = r'-\>'
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_SIGNOID = r'\$'
@@ -244,7 +244,7 @@ $numero1 = 10;
 $numero2 = 20;
 
 // Ejemplo de uso:
-$stack = new stack();
+$stack = new splstack();
 
 $fibonacci = array();
 
