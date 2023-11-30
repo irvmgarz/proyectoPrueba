@@ -21,24 +21,36 @@ def p_valor(p):
 	         | BOOLEAN
              | IDENTIFICADOR
 	'''
-def p_comparacionNum(p):
-	''' comparacion : MAYORQUE
+def p_comparadorNum(p):
+	''' comparadorNum : MAYORQUE
 					| MAYORIGUALQUE
 					| MENORQUE
 					| MENORIGUALQUE
-					| IDENTICO
+	'''
+def p_comparador(p):
+	''' comparador : IDENTICO
 					| NOIDENTICO
 					| IGUAL
 	'''
-def p_comparaciones(p):
-	''' comparaciones : valor comparacion valor
+
+def p_comparacion(p):
+	''' comparacion : valor comparador valor 
+					 | NUMERO comparadorNum NUMERO 
 	'''
+
+def p_comparaciones(p):
+	''' comparaciones : comparacion  
+					 | comparacion operadores comparaciones
+	'''
+
 def p_echo(p):
   '''ECHO : ECHO valores PUNTOCOMA
   '''
+
 def p_while(p):
-	''' WHILE : WHILE 
+	''' WHILE : WHILE PARENIZ comparaciones PARENDER LLAVEIZ argumento LLAVEDER 
 	'''
+
 def p_operadores(p):
    '''operadores : OPERADOR
 	         | AND
