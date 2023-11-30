@@ -104,14 +104,6 @@ def p_echo(p):
   '''echo : ECHO valores PUNTOCOMA
   '''
 
-# $stack->push("Deanna");
-def p_push(p):
-  ''' push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
-
-# $stack = new SplStack();
-def p_stack(p):
-  ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
-
 # Operaciones aritmeticas
 
 def p_operadorAritmetico(p):
@@ -163,7 +155,6 @@ def p_return(p):
 def p_estructuras(p):
   '''estructuras : queue
                   | stack
-                  | push
                   | array
                   '''
 
@@ -176,7 +167,6 @@ def p_estructurasControl(p):
 #QUEUE
 def p_queue(p):
   " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
-
 
 #Añadir elementos a la cola
 # $queue->enqueue('1');
@@ -214,7 +204,38 @@ def p_colaValido(p):
   " queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
 
 
+# STACK 
+# Incio Meiyin
 
+# $stack->push("Deanna");
+def p_stackPush(p):
+  ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
+
+# $stack = new SplStack();
+def p_stack(p):
+  ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
+
+#Avanzar
+# $stack->next();
+def p_stackAvanzar(p):
+  " stack : IDENTIFICADOR FLECHASIMPLE NEXT PARENIZ PARENDER PUNTOCOMA"
+
+#Situa el puntero al principio de la pila En este caso, debido a que SplStack es LIFO 
+# $stack->rewind();
+def p_stackPunteroPrincipio(p):
+  " stack : IDENTIFICADOR FLECHASIMPLE REWIND PARENIZ PARENDER PUNTOCOMA"
+
+# Mostrar elemento actual de la cola
+# $stack->current();
+def p_stackActual(p):
+  " stack : IDENTIFICADOR FLECHASIMPLE CURRENT PARENIZ PARENDER PUNTOCOMA"
+
+# Comprobar si en la cola aun hay elementos
+# $stack->valid()
+def p_stackValido(p):
+  " stack : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
+
+# Fin Meiyin
 
 
 #ARRAY

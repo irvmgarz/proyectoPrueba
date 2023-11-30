@@ -26,9 +26,6 @@ reservadas = {
   'enqueue': 'ENQUEUE',
   'dequeue': 'DEQUEUE',
   'count': 'COUNT',
-  'next': 'NEXT',
-  'rewind': 'REWIND',
-  'current': 'CURRENT',
   'valid': 'VALID',
   'elseif':'ELSEIF',
   'return' : 'RETURN',
@@ -40,6 +37,7 @@ reservadas = {
   'while': 'WHILE', 
   'for': 'FOR',
   'array':'ARRAY',
+  'break' : 'BREAK'
   # Fin Irving Macias
 
 }
