@@ -78,7 +78,21 @@ def p_foreach(p):
   ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
 #foreach ($numeros as $numero) {
 
+def p_casos(p):
+  ''' casos : caso 
+             | caso casos
+  '''
 
+def p_caso(p):
+  ''' caso : CASE valor DOSPUNTOS echo BREAK PUNTOCOMA
+  '''
+
+def p_switch(p):
+  ''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ casos DEFAULT DOSPUNTOS echo LLAVEDER
+  '''
+#switch ($color) { case "rojo": echo "El color es rojo."; break;default:echo "El color no es rojo, verde ni azul.";}
+#switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;default:echo "El color no es rojo, verde ni azul.";}
+#switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;case "verde": echo "El color es verde."; break;default:echo "El color no es rojo, verde ni azul.";}
 def p_if(p):
   ''' if : IF PARENIZ comparaciones PARENDER LLAVEIZ
           | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
@@ -169,6 +183,7 @@ def p_estructurasControl(p):
                         | for
                         | if
                         | foreach
+                        | switch
   '''
 
 #QUEUE
