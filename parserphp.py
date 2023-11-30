@@ -11,7 +11,7 @@ def p_sentencias(p):
                   | print
                   | operadorAritmetico
                   | return 
-                  | estructuras
+                  | estructurasDeDatos
                   | estructurasControl
                   '''
 
@@ -63,42 +63,6 @@ def p_incrementoDecremento(p):
                           | RESTA ENTERO
   '''
 
-# FALTA ARGUMENTOOOOOOS
-def p_while(p):
-	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
-	'''
-
-def p_for(p):
-  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ
-  '''
-#for ($i = 2; $i <= 10; $i + 2) {
-
-
-def p_foreach(p):
-  ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
-#foreach ($numeros as $numero) {
-
-def p_casos(p):
-  ''' casos : caso 
-             | caso casos
-  '''
-
-def p_caso(p):
-  ''' caso : CASE valor DOSPUNTOS echo BREAK PUNTOCOMA
-  '''
-
-def p_switch(p):
-  ''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ casos DEFAULT DOSPUNTOS echo LLAVEDER
-  '''
-#switch ($color) { case "rojo": echo "El color es rojo."; break;default:echo "El color no es rojo, verde ni azul.";}
-#switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;default:echo "El color no es rojo, verde ni azul.";}
-#switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;case "verde": echo "El color es verde."; break;default:echo "El color no es rojo, verde ni azul.";}
-def p_if(p):
-  ''' if : IF PARENIZ comparaciones PARENDER LLAVEIZ
-          | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
-  '''
-#if ($edad >= 18) {
-#if ($esAdmin) { 
 
 def p_operadores(p):
    '''operadores : OPERADOR
@@ -106,6 +70,16 @@ def p_operadores(p):
 	         | OR
 	'''
 
+# Operaciones aritmeticas
+def p_operadorAritmetico(p):
+    '''operadorAritmetico : SUMA
+						  | RESTA
+						  | MULT
+						  | DIVISION
+              | DIVISIONENTERA
+						  | MODULO
+						  | POTENCIA
+	'''
 
 # Asignacion
 def p_asignacion(p):
@@ -124,17 +98,7 @@ def p_echo(p):
   '''echo : ECHO valores PUNTOCOMA
   '''
 
-# Operaciones aritmeticas
 
-def p_operadorAritmetico(p):
-    '''operadorAritmetico : SUMA
-						  | RESTA
-						  | MULT
-						  | DIVISION
-              | DIVISIONENTERA
-						  | MODULO
-						  | POTENCIA
-	'''
 
 #FIN MEIYIN CHANG
 
@@ -160,23 +124,18 @@ def p_llamada_funcion(p):
                 | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
 '''
 
+# sumar($valor1, $valor2);
+# $suma = sumar($valor1, $valor2);
+
+
 # return 
 def p_return(p):
   " return : RETURN IDENTIFICADOR PUNTOCOMA"
 #return $resultado;
 
-# sumar($valor1, $valor2);
-# $suma = sumar($valor1, $valor2);
 
-#ESTRUCTURA DE DATOS
-#QUEUE
 
-# $queue = new SplQueue(); 
-def p_estructuras(p):
-  '''estructuras : queue
-                  | stack
-                  | array
-                  '''
+#-------------ESTRUCTURAS DE CONTROL-----------------------
 
 def p_estructurasControl(p):
   '''estructurasControl : while
@@ -185,6 +144,58 @@ def p_estructurasControl(p):
                         | foreach
                         | switch
   '''
+
+# FALTA ARGUMENTOOOOOOS
+def p_while(p):
+	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
+	'''
+
+def p_for(p):
+  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ
+  '''
+#for ($i = 2; $i <= 10; $i + 2) {
+
+
+def p_foreach(p):
+  ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
+#foreach ($numeros as $numero) {
+
+def p_switch(p):
+  ''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ casos DEFAULT DOSPUNTOS echo LLAVEDER
+  '''
+#switch ($color) { case "rojo": echo "El color es rojo."; break;default:echo "El color no es rojo, verde ni azul.";}
+#switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;default:echo "El color no es rojo, verde ni azul.";}
+#switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;case "verde": echo "El color es verde."; break;default:echo "El color no es rojo, verde ni azul.";}
+
+
+def p_casos(p):
+  ''' casos : caso 
+             | caso casos
+  '''
+
+def p_caso(p):
+  ''' caso : CASE valor DOSPUNTOS echo BREAK PUNTOCOMA
+  '''
+
+def p_if(p):
+  ''' if : IF PARENIZ comparaciones PARENDER LLAVEIZ
+          | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
+  '''
+#if ($edad >= 18) {
+#if ($esAdmin) { 
+
+#-------------------------------------------------------
+
+#----------------ESTRUCTURA DE DATOS--------------------
+#COLAS
+
+# $queue = new SplQueue(); 
+def p_estructurasDeDatos(p):
+  '''estructurasDeDatos : queue
+                  | stack
+                  | array
+                  '''
+
 
 #QUEUE
 def p_queue(p):
@@ -269,6 +280,8 @@ def p_array(p):
 #$arrayNumerico = [1, 2, 3, 4, 5];
 
 #Fin de Diego Martinez
+#--------------------------------------------
+
 
 def p_error(p):
     try:
