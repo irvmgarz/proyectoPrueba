@@ -14,6 +14,7 @@ reservadas = {
   'valid' : 'VALID',
   'current' : 'CURRENT',
   'next' : 'NEXT',
+  'foreach' : 'FOREACH',
   # Fin Meiyin Chang 
 
   # Inicio Diego Martinez
