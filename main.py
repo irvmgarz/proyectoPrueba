@@ -7,7 +7,7 @@ reservadas = {
   'print': 'PRINT',
   'switch':'SWITCH',
   'case': 'CASE',
-  'splstack':'SPLSTACK',
+  'SplStack':'STACK',
   'push' : 'PUSH',
   'pop' : 'POP',
   'rewind' : 'REWIND',

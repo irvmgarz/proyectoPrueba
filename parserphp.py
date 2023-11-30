@@ -89,7 +89,7 @@ def p_operadores(p):
 
 # Asignacion
 def p_asignacion(p):
-    '''asignacion : IDENTIFICADOR ASIGNAR valor'''
+    '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA'''
 
 # Impresion
 def p_print(p):
@@ -151,6 +151,7 @@ def p_return(p):
 def p_estructuras(p):
   '''estructuras : queue
                   | stack
+                  | push
                   | array
                   '''
 
@@ -160,11 +161,18 @@ def p_estructurasControl(p):
                         | if
   '''
 
+#QUEUE
 def p_queue(p):
   " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
 
+# $stack->push("Deanna");
+def p_push(p):
+  ''' push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
+
+# $stack = new SplStack();
 def p_stack(p):
-  ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
+  ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
+
 
 #ARRAY
 def p_array(p):
