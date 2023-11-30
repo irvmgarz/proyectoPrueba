@@ -5,11 +5,19 @@ from main import tokens
 resultado_sintactico = []
 
 def p_sentencias(p):
-    '''sentencias : asignacion'''
+    '''sentencias : asignacion
+                  | echo 
+                  | funcion
+                  | while
+                  | print
+                  | operadorAritmetico
+                  | return 
+                  | queue
+                  '''
 
 def p_valores(p):
   '''valores : valor
-            | valor COMMA valores'''
+            | valor COMA valores'''
 
 def p_numero(p):
   '''NUMERO : ENTERO
@@ -44,11 +52,12 @@ def p_comparaciones(p):
 	'''
 
 def p_echo(p):
-  '''ECHO : ECHO valores PUNTOCOMA
+  '''echo : ECHO valores PUNTOCOMA
   '''
 
+# FALTA ARGUMENTOOOOOOS
 def p_while(p):
-	''' WHILE : WHILE PARENIZ comparaciones PARENDER LLAVEIZ argumento LLAVEDER 
+	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ  LLAVEDER 
 	'''
 
 def p_operadores(p):
@@ -70,8 +79,7 @@ def p_print(p):
 def p_print_sinvalor(p):
   "print : PRINT PARENIZ PARENDER PUNTOCOMA"
 
-def p_printf_conformato(p):
-  "printf : PRINTF PARENIZ valores PARENDER PUNTOCOMA"
+
 
 # Operaciones aritmeticas
 
@@ -90,7 +98,7 @@ def p_operadorAritmetico(p):
 #FUNCIONES
 #declaracion de una funcion
 def p_declaracion_funcion(p):
-    "funcion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZQ"
+    "funcion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ"
 # function sumar($numero1, $numero2) {
 
 
@@ -102,18 +110,29 @@ def p_parametro(p):
 
 #llamada a una funcion
 def p_llamada_funcion(p):
-    ''' funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOYCOMA
-                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER SEMICOLON
+    ''' funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
+                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
 '''
 
 # return 
 def p_return(p):
-  " return : RETURN IDENTIFICADOR PUNTOYCOMA"
+  " return : RETURN IDENTIFICADOR PUNTOCOMA"
 #return $resultado;
 
 # sumar($valor1, $valor2);
 # $suma = sumar($valor1, $valor2);
-                
+
+#ESTRUCTURA DE DATOS
+#QUEUE
+
+# $queue = new SplQueue(); 
+def p_queue(p):
+  " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
+
+
+
+
+
 #Fin de Diego Martinez
 
 def p_error(p):
