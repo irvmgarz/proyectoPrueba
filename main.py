@@ -38,7 +38,6 @@ reservadas = {
 
 }
 
-
 # Secuencia de tokens
 tokens = (
  #Inicio Irving Macias
@@ -104,7 +103,6 @@ t_LLAVEIZ = r'\{'
 t_LLAVEDER = r'\}'
 #Fin Irving Macias
 
-
 #Inicio Diego Martinez
 t_PARENIZ = r'\('
 t_PARENDER = r'\)'
@@ -128,7 +126,7 @@ t_MENORIGUALQUE = r'<='
 t_DOSPUNTOS = r':'
 t_MODULO = r'%'
 t_DIVISIONENTERA = r'//'
-t_FLECHASIMPLE = r'-\>'
+t_FLECHASIMPLE = r'\-\>'
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_SIGNOID = r'\$'
@@ -176,13 +174,6 @@ def t_IDENTIFICADOR(t):
   r'\$?[a-zA-Z_]\w*'
   t.type = reservadas.get(t.value,'IDENTIFICADOR')
   return t
-
-
-
-
-#Inicio Irving y Meiyin
-
-#Fin Irving y Meiyin
 
 # Expresión regular para reconocer saltos de línea
 def t_newline(t):

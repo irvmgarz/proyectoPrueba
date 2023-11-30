@@ -12,7 +12,7 @@ def p_sentencias(p):
                   | print
                   | operadorAritmetico
                   | return 
-                  | queue
+                  | estructuras
                   '''
 
 def p_valores(p):
@@ -46,16 +46,16 @@ def p_variableOperacion(p):
                   | IDENTIFICADOR
     '''
 
+def p_comparaciones(p):
+	''' comparaciones : comparacion  
+					 | comparacion operadores comparaciones
+	'''
+
 def p_comparacion(p):
 	''' comparacion :  variables comparadorNum variables 
             | valor comparador valor 
 	'''
 
-
-def p_comparaciones(p):
-	''' comparaciones : comparacion  
-					 | comparacion operadores comparaciones
-	'''
 
 def p_echo(p):
   '''echo : ECHO valores PUNTOCOMA
@@ -84,7 +84,6 @@ def p_print(p):
 
 def p_print_sinvalor(p):
   "print : PRINT PARENIZ PARENDER PUNTOCOMA"
-
 
 
 # Operaciones aritmeticas
@@ -132,10 +131,15 @@ def p_return(p):
 #QUEUE
 
 # $queue = new SplQueue(); 
+def p_estructuras(p):
+  '''estructuras : queue
+                  | stack'''
+
 def p_queue(p):
   " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
 
-
+def p_stack(p):
+  ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
 
 
 

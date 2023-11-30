@@ -16,7 +16,6 @@ Unused terminals:
     ELSE
     ELSEIF
     ENQUEUE
-    FLECHASIMPLE
     FOR
     IF
     INCREMENTO
@@ -24,7 +23,6 @@ Unused terminals:
     NEXT
     POP
     PUNTO
-    PUSH
     REWIND
     SIGNOID
     SPLSTACK
@@ -41,7 +39,7 @@ Rule 4     sentencias -> while
 Rule 5     sentencias -> print
 Rule 6     sentencias -> operadorAritmetico
 Rule 7     sentencias -> return
-Rule 8     sentencias -> queue
+Rule 8     sentencias -> estructuras
 Rule 9     valores -> valor
 Rule 10    valores -> valor COMA valores
 Rule 11    NUMERO -> ENTERO
@@ -59,10 +57,10 @@ Rule 22    comparador -> NOIDENTICO
 Rule 23    comparador -> IGUAL
 Rule 24    variables -> NUMERO
 Rule 25    variables -> IDENTIFICADOR
-Rule 26    comparacion -> variables comparadorNum variables
-Rule 27    comparacion -> valor comparador valor
-Rule 28    comparaciones -> comparacion
-Rule 29    comparaciones -> comparacion operadores comparaciones
+Rule 26    comparaciones -> comparacion
+Rule 27    comparaciones -> comparacion operadores comparaciones
+Rule 28    comparacion -> variables comparadorNum variables
+Rule 29    comparacion -> valor comparador valor
 Rule 30    echo -> ECHO valores PUNTOCOMA
 Rule 31    while -> WHILE PARENIZ comparaciones PARENDER LLAVEIZ
 Rule 32    operadores -> OPERADOR
@@ -85,7 +83,10 @@ Rule 48    parametro -> IDENTIFICADOR COMA parametro
 Rule 49    funcion -> NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
 Rule 50    funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
 Rule 51    return -> RETURN IDENTIFICADOR PUNTOCOMA
-Rule 52    queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+Rule 52    estructuras -> queue
+Rule 53    estructuras -> stack
+Rule 54    queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+Rule 55    stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA
 
 Terminals, with rules where they appear
 
@@ -93,7 +94,7 @@ AND                  : 33
 ANDEQUAL             : 
 ARRAY                : 
 ASIGNACION           : 
-ASIGNAR              : 35 50 52
+ASIGNAR              : 35 50 54
 BOOLEAN              : 15
 CADENA               : 14
 CASE                 : 
@@ -112,12 +113,12 @@ ELSE                 :
 ELSEIF               : 
 ENQUEUE              : 
 ENTERO               : 11
-FLECHASIMPLE         : 
+FLECHASIMPLE         : 55
 FLOTANTE             : 12
 FOR                  : 
 FUNCTION             : 46
 IDENTICO             : 21
-IDENTIFICADOR        : 16 25 35 47 48 50 51 52
+IDENTIFICADOR        : 16 25 35 47 48 50 51 54 55
 IF                   : 
 IGUAL                : 23
 INCREMENTO           : 
@@ -130,20 +131,20 @@ MENORQUE             : 19
 MODULO               : 44
 MULT                 : 41
 NAMEFUNCTION         : 46 49 50
-NEW                  : 52
+NEW                  : 54
 NEXT                 : 
 NOIDENTICO           : 22
 OPERADOR             : 32
 OR                   : 34
-PARENDER             : 31 36 38 46 49 50 52
-PARENIZ              : 31 36 38 46 49 50 52
+PARENDER             : 31 36 38 46 49 50 54 55
+PARENIZ              : 31 36 38 46 49 50 54 55
 POP                  : 
 POTENCIA             : 45
 PRINT                : 36 37 38
 PUNTO                : 
-PUNTOCOMA            : 30 36 37 38 49 50 51 52
-PUSH                 : 
-QUEUE                : 52
+PUNTOCOMA            : 30 36 37 38 49 50 51 54 55
+PUSH                 : 55
+QUEUE                : 54
 RESTA                : 40
 RETURN               : 51
 REWIND               : 
@@ -159,22 +160,24 @@ Nonterminals, with rules where they appear
 
 NUMERO               : 13 24
 asignacion           : 1
-comparacion          : 28 29
-comparaciones        : 29 31
-comparador           : 27
-comparadorNum        : 26
+comparacion          : 26 27
+comparaciones        : 27 31
+comparador           : 29
+comparadorNum        : 28
 echo                 : 2
+estructuras          : 8
 funcion              : 3
 operadorAritmetico   : 6
-operadores           : 29
+operadores           : 27
 parametro            : 46 48 49 50
 print                : 5
-queue                : 8
+queue                : 52
 return               : 7
 sentencias           : 0
-valor                : 9 10 27 27 35 37
+stack                : 53
+valor                : 9 10 29 29 35 37 55
 valores              : 10 30 36
-variables            : 26 26
+variables            : 28 28
 while                : 4
 
 Parsing method: LALR
@@ -189,7 +192,7 @@ state 0
     (5) sentencias -> . print
     (6) sentencias -> . operadorAritmetico
     (7) sentencias -> . return
-    (8) sentencias -> . queue
+    (8) sentencias -> . estructuras
     (35) asignacion -> . IDENTIFICADOR ASIGNAR valor
     (30) echo -> . ECHO valores PUNTOCOMA
     (46) funcion -> . FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ
@@ -207,7 +210,10 @@ state 0
     (44) operadorAritmetico -> . MODULO
     (45) operadorAritmetico -> . POTENCIA
     (51) return -> . RETURN IDENTIFICADOR PUNTOCOMA
-    (52) queue -> . IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+    (52) estructuras -> . queue
+    (53) estructuras -> . stack
+    (54) queue -> . IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+    (55) stack -> . IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA
 
     IDENTIFICADOR   shift and go to state 10
     ECHO            shift and go to state 11
@@ -232,7 +238,9 @@ state 0
     print                          shift and go to state 6
     operadorAritmetico             shift and go to state 7
     return                         shift and go to state 8
-    queue                          shift and go to state 9
+    estructuras                    shift and go to state 9
+    queue                          shift and go to state 24
+    stack                          shift and go to state 25
 
 state 1
 
@@ -291,18 +299,20 @@ state 8
 
 state 9
 
-    (8) sentencias -> queue .
+    (8) sentencias -> estructuras .
 
-    $end            reduce using rule 8 (sentencias -> queue .)
+    $end            reduce using rule 8 (sentencias -> estructuras .)
 
 
 state 10
 
     (35) asignacion -> IDENTIFICADOR . ASIGNAR valor
     (50) funcion -> IDENTIFICADOR . ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
-    (52) queue -> IDENTIFICADOR . ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+    (54) queue -> IDENTIFICADOR . ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+    (55) stack -> IDENTIFICADOR . FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA
 
-    ASIGNAR         shift and go to state 24
+    ASIGNAR         shift and go to state 26
+    FLECHASIMPLE    shift and go to state 27
 
 
 state 11
@@ -317,35 +327,35 @@ state 11
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    IDENTIFICADOR   shift and go to state 30
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    valores                        shift and go to state 25
-    valor                          shift and go to state 26
-    NUMERO                         shift and go to state 27
+    valores                        shift and go to state 28
+    valor                          shift and go to state 29
+    NUMERO                         shift and go to state 30
 
 state 12
 
     (46) funcion -> FUNCTION . NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ
 
-    NAMEFUNCTION    shift and go to state 33
+    NAMEFUNCTION    shift and go to state 36
 
 
 state 13
 
     (49) funcion -> NAMEFUNCTION . PARENIZ parametro PARENDER PUNTOCOMA
 
-    PARENIZ         shift and go to state 34
+    PARENIZ         shift and go to state 37
 
 
 state 14
 
     (31) while -> WHILE . PARENIZ comparaciones PARENDER LLAVEIZ
 
-    PARENIZ         shift and go to state 35
+    PARENIZ         shift and go to state 38
 
 
 state 15
@@ -360,15 +370,15 @@ state 15
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    PARENIZ         shift and go to state 36
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    IDENTIFICADOR   shift and go to state 30
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    PARENIZ         shift and go to state 39
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    valor                          shift and go to state 37
-    NUMERO                         shift and go to state 27
+    valor                          shift and go to state 40
+    NUMERO                         shift and go to state 30
 
 state 16
 
@@ -423,14 +433,28 @@ state 23
 
     (51) return -> RETURN . IDENTIFICADOR PUNTOCOMA
 
-    IDENTIFICADOR   shift and go to state 38
+    IDENTIFICADOR   shift and go to state 41
 
 
 state 24
 
+    (52) estructuras -> queue .
+
+    $end            reduce using rule 52 (estructuras -> queue .)
+
+
+state 25
+
+    (53) estructuras -> stack .
+
+    $end            reduce using rule 53 (estructuras -> stack .)
+
+
+state 26
+
     (35) asignacion -> IDENTIFICADOR ASIGNAR . valor
     (50) funcion -> IDENTIFICADOR ASIGNAR . NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
-    (52) queue -> IDENTIFICADOR ASIGNAR . NEW QUEUE PARENIZ PARENDER PUNTOCOMA
+    (54) queue -> IDENTIFICADOR ASIGNAR . NEW QUEUE PARENIZ PARENDER PUNTOCOMA
     (13) valor -> . NUMERO
     (14) valor -> . CADENA
     (15) valor -> . BOOLEAN
@@ -438,35 +462,42 @@ state 24
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    NAMEFUNCTION    shift and go to state 40
-    NEW             shift and go to state 41
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    IDENTIFICADOR   shift and go to state 30
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    NAMEFUNCTION    shift and go to state 43
+    NEW             shift and go to state 44
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    valor                          shift and go to state 39
-    NUMERO                         shift and go to state 27
+    valor                          shift and go to state 42
+    NUMERO                         shift and go to state 30
 
-state 25
+state 27
+
+    (55) stack -> IDENTIFICADOR FLECHASIMPLE . PUSH PARENIZ valor PARENDER PUNTOCOMA
+
+    PUSH            shift and go to state 45
+
+
+state 28
 
     (30) echo -> ECHO valores . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 42
+    PUNTOCOMA       shift and go to state 46
 
 
-state 26
+state 29
 
     (9) valores -> valor .
     (10) valores -> valor . COMA valores
 
     PUNTOCOMA       reduce using rule 9 (valores -> valor .)
     PARENDER        reduce using rule 9 (valores -> valor .)
-    COMA            shift and go to state 43
+    COMA            shift and go to state 47
 
 
-state 27
+state 30
 
     (13) valor -> NUMERO .
 
@@ -479,7 +510,7 @@ state 27
     OR              reduce using rule 13 (valor -> NUMERO .)
 
 
-state 28
+state 31
 
     (14) valor -> CADENA .
 
@@ -495,7 +526,7 @@ state 28
     OR              reduce using rule 14 (valor -> CADENA .)
 
 
-state 29
+state 32
 
     (15) valor -> BOOLEAN .
 
@@ -511,7 +542,7 @@ state 29
     OR              reduce using rule 15 (valor -> BOOLEAN .)
 
 
-state 30
+state 33
 
     (16) valor -> IDENTIFICADOR .
 
@@ -524,7 +555,7 @@ state 30
     OR              reduce using rule 16 (valor -> IDENTIFICADOR .)
 
 
-state 31
+state 34
 
     (11) NUMERO -> ENTERO .
 
@@ -544,7 +575,7 @@ state 31
     OR              reduce using rule 11 (NUMERO -> ENTERO .)
 
 
-state 32
+state 35
 
     (12) NUMERO -> FLOTANTE .
 
@@ -564,30 +595,30 @@ state 32
     OR              reduce using rule 12 (NUMERO -> FLOTANTE .)
 
 
-state 33
+state 36
 
     (46) funcion -> FUNCTION NAMEFUNCTION . PARENIZ parametro PARENDER LLAVEIZ
 
-    PARENIZ         shift and go to state 44
+    PARENIZ         shift and go to state 48
 
 
-state 34
+state 37
 
     (49) funcion -> NAMEFUNCTION PARENIZ . parametro PARENDER PUNTOCOMA
     (47) parametro -> . IDENTIFICADOR
     (48) parametro -> . IDENTIFICADOR COMA parametro
 
-    IDENTIFICADOR   shift and go to state 46
+    IDENTIFICADOR   shift and go to state 50
 
-    parametro                      shift and go to state 45
+    parametro                      shift and go to state 49
 
-state 35
+state 38
 
     (31) while -> WHILE PARENIZ . comparaciones PARENDER LLAVEIZ
-    (28) comparaciones -> . comparacion
-    (29) comparaciones -> . comparacion operadores comparaciones
-    (26) comparacion -> . variables comparadorNum variables
-    (27) comparacion -> . valor comparador valor
+    (26) comparaciones -> . comparacion
+    (27) comparaciones -> . comparacion operadores comparaciones
+    (28) comparacion -> . variables comparadorNum variables
+    (29) comparacion -> . valor comparador valor
     (24) variables -> . NUMERO
     (25) variables -> . IDENTIFICADOR
     (13) valor -> . NUMERO
@@ -597,19 +628,19 @@ state 35
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    IDENTIFICADOR   shift and go to state 52
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    IDENTIFICADOR   shift and go to state 56
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    comparaciones                  shift and go to state 47
-    comparacion                    shift and go to state 48
-    variables                      shift and go to state 49
-    valor                          shift and go to state 50
-    NUMERO                         shift and go to state 51
+    comparaciones                  shift and go to state 51
+    comparacion                    shift and go to state 52
+    variables                      shift and go to state 53
+    valor                          shift and go to state 54
+    NUMERO                         shift and go to state 55
 
-state 36
+state 39
 
     (36) print -> PRINT PARENIZ . valores PARENDER PUNTOCOMA
     (38) print -> PRINT PARENIZ . PARENDER PUNTOCOMA
@@ -622,60 +653,67 @@ state 36
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    PARENDER        shift and go to state 54
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    IDENTIFICADOR   shift and go to state 30
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    PARENDER        shift and go to state 58
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    valores                        shift and go to state 53
-    valor                          shift and go to state 26
-    NUMERO                         shift and go to state 27
+    valores                        shift and go to state 57
+    valor                          shift and go to state 29
+    NUMERO                         shift and go to state 30
 
-state 37
+state 40
 
     (37) print -> PRINT valor . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 55
+    PUNTOCOMA       shift and go to state 59
 
 
-state 38
+state 41
 
     (51) return -> RETURN IDENTIFICADOR . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 56
+    PUNTOCOMA       shift and go to state 60
 
 
-state 39
+state 42
 
     (35) asignacion -> IDENTIFICADOR ASIGNAR valor .
 
     $end            reduce using rule 35 (asignacion -> IDENTIFICADOR ASIGNAR valor .)
 
 
-state 40
+state 43
 
     (50) funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION . PARENIZ parametro PARENDER PUNTOCOMA
 
-    PARENIZ         shift and go to state 57
+    PARENIZ         shift and go to state 61
 
 
-state 41
+state 44
 
-    (52) queue -> IDENTIFICADOR ASIGNAR NEW . QUEUE PARENIZ PARENDER PUNTOCOMA
+    (54) queue -> IDENTIFICADOR ASIGNAR NEW . QUEUE PARENIZ PARENDER PUNTOCOMA
 
-    QUEUE           shift and go to state 58
+    QUEUE           shift and go to state 62
 
 
-state 42
+state 45
+
+    (55) stack -> IDENTIFICADOR FLECHASIMPLE PUSH . PARENIZ valor PARENDER PUNTOCOMA
+
+    PARENIZ         shift and go to state 63
+
+
+state 46
 
     (30) echo -> ECHO valores PUNTOCOMA .
 
     $end            reduce using rule 30 (echo -> ECHO valores PUNTOCOMA .)
 
 
-state 43
+state 47
 
     (10) valores -> valor COMA . valores
     (9) valores -> . valor
@@ -687,93 +725,93 @@ state 43
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    IDENTIFICADOR   shift and go to state 30
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    valor                          shift and go to state 26
-    valores                        shift and go to state 59
-    NUMERO                         shift and go to state 27
+    valor                          shift and go to state 29
+    valores                        shift and go to state 64
+    NUMERO                         shift and go to state 30
 
-state 44
+state 48
 
     (46) funcion -> FUNCTION NAMEFUNCTION PARENIZ . parametro PARENDER LLAVEIZ
     (47) parametro -> . IDENTIFICADOR
     (48) parametro -> . IDENTIFICADOR COMA parametro
 
-    IDENTIFICADOR   shift and go to state 46
+    IDENTIFICADOR   shift and go to state 50
 
-    parametro                      shift and go to state 60
+    parametro                      shift and go to state 65
 
-state 45
+state 49
 
     (49) funcion -> NAMEFUNCTION PARENIZ parametro . PARENDER PUNTOCOMA
 
-    PARENDER        shift and go to state 61
+    PARENDER        shift and go to state 66
 
 
-state 46
+state 50
 
     (47) parametro -> IDENTIFICADOR .
     (48) parametro -> IDENTIFICADOR . COMA parametro
 
     PARENDER        reduce using rule 47 (parametro -> IDENTIFICADOR .)
-    COMA            shift and go to state 62
+    COMA            shift and go to state 67
 
 
-state 47
+state 51
 
     (31) while -> WHILE PARENIZ comparaciones . PARENDER LLAVEIZ
 
-    PARENDER        shift and go to state 63
+    PARENDER        shift and go to state 68
 
 
-state 48
+state 52
 
-    (28) comparaciones -> comparacion .
-    (29) comparaciones -> comparacion . operadores comparaciones
+    (26) comparaciones -> comparacion .
+    (27) comparaciones -> comparacion . operadores comparaciones
     (32) operadores -> . OPERADOR
     (33) operadores -> . AND
     (34) operadores -> . OR
 
-    PARENDER        reduce using rule 28 (comparaciones -> comparacion .)
-    OPERADOR        shift and go to state 65
-    AND             shift and go to state 66
-    OR              shift and go to state 67
+    PARENDER        reduce using rule 26 (comparaciones -> comparacion .)
+    OPERADOR        shift and go to state 70
+    AND             shift and go to state 71
+    OR              shift and go to state 72
 
-    operadores                     shift and go to state 64
+    operadores                     shift and go to state 69
 
-state 49
+state 53
 
-    (26) comparacion -> variables . comparadorNum variables
+    (28) comparacion -> variables . comparadorNum variables
     (17) comparadorNum -> . MAYORQUE
     (18) comparadorNum -> . MAYORIGUALQUE
     (19) comparadorNum -> . MENORQUE
     (20) comparadorNum -> . MENORIGUALQUE
 
-    MAYORQUE        shift and go to state 69
-    MAYORIGUALQUE   shift and go to state 70
-    MENORQUE        shift and go to state 71
-    MENORIGUALQUE   shift and go to state 72
+    MAYORQUE        shift and go to state 74
+    MAYORIGUALQUE   shift and go to state 75
+    MENORQUE        shift and go to state 76
+    MENORIGUALQUE   shift and go to state 77
 
-    comparadorNum                  shift and go to state 68
+    comparadorNum                  shift and go to state 73
 
-state 50
+state 54
 
-    (27) comparacion -> valor . comparador valor
+    (29) comparacion -> valor . comparador valor
     (21) comparador -> . IDENTICO
     (22) comparador -> . NOIDENTICO
     (23) comparador -> . IGUAL
 
-    IDENTICO        shift and go to state 74
-    NOIDENTICO      shift and go to state 75
-    IGUAL           shift and go to state 76
+    IDENTICO        shift and go to state 79
+    NOIDENTICO      shift and go to state 80
+    IGUAL           shift and go to state 81
 
-    comparador                     shift and go to state 73
+    comparador                     shift and go to state 78
 
-state 51
+state 55
 
     (24) variables -> NUMERO .
     (13) valor -> NUMERO .
@@ -787,7 +825,7 @@ state 51
     IGUAL           reduce using rule 13 (valor -> NUMERO .)
 
 
-state 52
+state 56
 
     (25) variables -> IDENTIFICADOR .
     (16) valor -> IDENTIFICADOR .
@@ -801,52 +839,71 @@ state 52
     IGUAL           reduce using rule 16 (valor -> IDENTIFICADOR .)
 
 
-state 53
+state 57
 
     (36) print -> PRINT PARENIZ valores . PARENDER PUNTOCOMA
 
-    PARENDER        shift and go to state 77
+    PARENDER        shift and go to state 82
 
 
-state 54
+state 58
 
     (38) print -> PRINT PARENIZ PARENDER . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 78
+    PUNTOCOMA       shift and go to state 83
 
 
-state 55
+state 59
 
     (37) print -> PRINT valor PUNTOCOMA .
 
     $end            reduce using rule 37 (print -> PRINT valor PUNTOCOMA .)
 
 
-state 56
+state 60
 
     (51) return -> RETURN IDENTIFICADOR PUNTOCOMA .
 
     $end            reduce using rule 51 (return -> RETURN IDENTIFICADOR PUNTOCOMA .)
 
 
-state 57
+state 61
 
     (50) funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ . parametro PARENDER PUNTOCOMA
     (47) parametro -> . IDENTIFICADOR
     (48) parametro -> . IDENTIFICADOR COMA parametro
 
-    IDENTIFICADOR   shift and go to state 46
+    IDENTIFICADOR   shift and go to state 50
 
-    parametro                      shift and go to state 79
+    parametro                      shift and go to state 84
 
-state 58
+state 62
 
-    (52) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE . PARENIZ PARENDER PUNTOCOMA
+    (54) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE . PARENIZ PARENDER PUNTOCOMA
 
-    PARENIZ         shift and go to state 80
+    PARENIZ         shift and go to state 85
 
 
-state 59
+state 63
+
+    (55) stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ . valor PARENDER PUNTOCOMA
+    (13) valor -> . NUMERO
+    (14) valor -> . CADENA
+    (15) valor -> . BOOLEAN
+    (16) valor -> . IDENTIFICADOR
+    (11) NUMERO -> . ENTERO
+    (12) NUMERO -> . FLOTANTE
+
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
+
+    valor                          shift and go to state 86
+    NUMERO                         shift and go to state 30
+
+state 64
 
     (10) valores -> valor COMA valores .
 
@@ -854,44 +911,44 @@ state 59
     PARENDER        reduce using rule 10 (valores -> valor COMA valores .)
 
 
-state 60
+state 65
 
     (46) funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro . PARENDER LLAVEIZ
 
-    PARENDER        shift and go to state 81
+    PARENDER        shift and go to state 87
 
 
-state 61
+state 66
 
     (49) funcion -> NAMEFUNCTION PARENIZ parametro PARENDER . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 82
+    PUNTOCOMA       shift and go to state 88
 
 
-state 62
+state 67
 
     (48) parametro -> IDENTIFICADOR COMA . parametro
     (47) parametro -> . IDENTIFICADOR
     (48) parametro -> . IDENTIFICADOR COMA parametro
 
-    IDENTIFICADOR   shift and go to state 46
+    IDENTIFICADOR   shift and go to state 50
 
-    parametro                      shift and go to state 83
+    parametro                      shift and go to state 89
 
-state 63
+state 68
 
     (31) while -> WHILE PARENIZ comparaciones PARENDER . LLAVEIZ
 
-    LLAVEIZ         shift and go to state 84
+    LLAVEIZ         shift and go to state 90
 
 
-state 64
+state 69
 
-    (29) comparaciones -> comparacion operadores . comparaciones
-    (28) comparaciones -> . comparacion
-    (29) comparaciones -> . comparacion operadores comparaciones
-    (26) comparacion -> . variables comparadorNum variables
-    (27) comparacion -> . valor comparador valor
+    (27) comparaciones -> comparacion operadores . comparaciones
+    (26) comparaciones -> . comparacion
+    (27) comparaciones -> . comparacion operadores comparaciones
+    (28) comparacion -> . variables comparadorNum variables
+    (29) comparacion -> . valor comparador valor
     (24) variables -> . NUMERO
     (25) variables -> . IDENTIFICADOR
     (13) valor -> . NUMERO
@@ -901,19 +958,19 @@ state 64
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    IDENTIFICADOR   shift and go to state 52
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    IDENTIFICADOR   shift and go to state 56
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    comparacion                    shift and go to state 48
-    comparaciones                  shift and go to state 85
-    variables                      shift and go to state 49
-    valor                          shift and go to state 50
-    NUMERO                         shift and go to state 51
+    comparacion                    shift and go to state 52
+    comparaciones                  shift and go to state 91
+    variables                      shift and go to state 53
+    valor                          shift and go to state 54
+    NUMERO                         shift and go to state 55
 
-state 65
+state 70
 
     (32) operadores -> OPERADOR .
 
@@ -924,7 +981,7 @@ state 65
     FLOTANTE        reduce using rule 32 (operadores -> OPERADOR .)
 
 
-state 66
+state 71
 
     (33) operadores -> AND .
 
@@ -935,7 +992,7 @@ state 66
     FLOTANTE        reduce using rule 33 (operadores -> AND .)
 
 
-state 67
+state 72
 
     (34) operadores -> OR .
 
@@ -946,22 +1003,22 @@ state 67
     FLOTANTE        reduce using rule 34 (operadores -> OR .)
 
 
-state 68
+state 73
 
-    (26) comparacion -> variables comparadorNum . variables
+    (28) comparacion -> variables comparadorNum . variables
     (24) variables -> . NUMERO
     (25) variables -> . IDENTIFICADOR
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    IDENTIFICADOR   shift and go to state 88
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    IDENTIFICADOR   shift and go to state 94
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    variables                      shift and go to state 86
-    NUMERO                         shift and go to state 87
+    variables                      shift and go to state 92
+    NUMERO                         shift and go to state 93
 
-state 69
+state 74
 
     (17) comparadorNum -> MAYORQUE .
 
@@ -970,7 +1027,7 @@ state 69
     FLOTANTE        reduce using rule 17 (comparadorNum -> MAYORQUE .)
 
 
-state 70
+state 75
 
     (18) comparadorNum -> MAYORIGUALQUE .
 
@@ -979,7 +1036,7 @@ state 70
     FLOTANTE        reduce using rule 18 (comparadorNum -> MAYORIGUALQUE .)
 
 
-state 71
+state 76
 
     (19) comparadorNum -> MENORQUE .
 
@@ -988,7 +1045,7 @@ state 71
     FLOTANTE        reduce using rule 19 (comparadorNum -> MENORQUE .)
 
 
-state 72
+state 77
 
     (20) comparadorNum -> MENORIGUALQUE .
 
@@ -997,9 +1054,9 @@ state 72
     FLOTANTE        reduce using rule 20 (comparadorNum -> MENORIGUALQUE .)
 
 
-state 73
+state 78
 
-    (27) comparacion -> valor comparador . valor
+    (29) comparacion -> valor comparador . valor
     (13) valor -> . NUMERO
     (14) valor -> . CADENA
     (15) valor -> . BOOLEAN
@@ -1007,16 +1064,16 @@ state 73
     (11) NUMERO -> . ENTERO
     (12) NUMERO -> . FLOTANTE
 
-    CADENA          shift and go to state 28
-    BOOLEAN         shift and go to state 29
-    IDENTIFICADOR   shift and go to state 30
-    ENTERO          shift and go to state 31
-    FLOTANTE        shift and go to state 32
+    CADENA          shift and go to state 31
+    BOOLEAN         shift and go to state 32
+    IDENTIFICADOR   shift and go to state 33
+    ENTERO          shift and go to state 34
+    FLOTANTE        shift and go to state 35
 
-    valor                          shift and go to state 89
-    NUMERO                         shift and go to state 27
+    valor                          shift and go to state 95
+    NUMERO                         shift and go to state 30
 
-state 74
+state 79
 
     (21) comparador -> IDENTICO .
 
@@ -1027,7 +1084,7 @@ state 74
     FLOTANTE        reduce using rule 21 (comparador -> IDENTICO .)
 
 
-state 75
+state 80
 
     (22) comparador -> NOIDENTICO .
 
@@ -1038,7 +1095,7 @@ state 75
     FLOTANTE        reduce using rule 22 (comparador -> NOIDENTICO .)
 
 
-state 76
+state 81
 
     (23) comparador -> IGUAL .
 
@@ -1049,80 +1106,87 @@ state 76
     FLOTANTE        reduce using rule 23 (comparador -> IGUAL .)
 
 
-state 77
+state 82
 
     (36) print -> PRINT PARENIZ valores PARENDER . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 90
+    PUNTOCOMA       shift and go to state 96
 
 
-state 78
+state 83
 
     (38) print -> PRINT PARENIZ PARENDER PUNTOCOMA .
 
     $end            reduce using rule 38 (print -> PRINT PARENIZ PARENDER PUNTOCOMA .)
 
 
-state 79
+state 84
 
     (50) funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro . PARENDER PUNTOCOMA
 
-    PARENDER        shift and go to state 91
+    PARENDER        shift and go to state 97
 
 
-state 80
+state 85
 
-    (52) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ . PARENDER PUNTOCOMA
+    (54) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ . PARENDER PUNTOCOMA
 
-    PARENDER        shift and go to state 92
+    PARENDER        shift and go to state 98
 
 
-state 81
+state 86
+
+    (55) stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor . PARENDER PUNTOCOMA
+
+    PARENDER        shift and go to state 99
+
+
+state 87
 
     (46) funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER . LLAVEIZ
 
-    LLAVEIZ         shift and go to state 93
+    LLAVEIZ         shift and go to state 100
 
 
-state 82
+state 88
 
     (49) funcion -> NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA .
 
     $end            reduce using rule 49 (funcion -> NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA .)
 
 
-state 83
+state 89
 
     (48) parametro -> IDENTIFICADOR COMA parametro .
 
     PARENDER        reduce using rule 48 (parametro -> IDENTIFICADOR COMA parametro .)
 
 
-state 84
+state 90
 
     (31) while -> WHILE PARENIZ comparaciones PARENDER LLAVEIZ .
 
     $end            reduce using rule 31 (while -> WHILE PARENIZ comparaciones PARENDER LLAVEIZ .)
 
 
-state 85
+state 91
 
-    (29) comparaciones -> comparacion operadores comparaciones .
+    (27) comparaciones -> comparacion operadores comparaciones .
 
-    PARENDER        reduce using rule 29 (comparaciones -> comparacion operadores comparaciones .)
-
-
-state 86
-
-    (26) comparacion -> variables comparadorNum variables .
-
-    OPERADOR        reduce using rule 26 (comparacion -> variables comparadorNum variables .)
-    AND             reduce using rule 26 (comparacion -> variables comparadorNum variables .)
-    OR              reduce using rule 26 (comparacion -> variables comparadorNum variables .)
-    PARENDER        reduce using rule 26 (comparacion -> variables comparadorNum variables .)
+    PARENDER        reduce using rule 27 (comparaciones -> comparacion operadores comparaciones .)
 
 
-state 87
+state 92
+
+    (28) comparacion -> variables comparadorNum variables .
+
+    OPERADOR        reduce using rule 28 (comparacion -> variables comparadorNum variables .)
+    AND             reduce using rule 28 (comparacion -> variables comparadorNum variables .)
+    OR              reduce using rule 28 (comparacion -> variables comparadorNum variables .)
+    PARENDER        reduce using rule 28 (comparacion -> variables comparadorNum variables .)
+
+
+state 93
 
     (24) variables -> NUMERO .
 
@@ -1132,7 +1196,7 @@ state 87
     PARENDER        reduce using rule 24 (variables -> NUMERO .)
 
 
-state 88
+state 94
 
     (25) variables -> IDENTIFICADOR .
 
@@ -1142,54 +1206,68 @@ state 88
     PARENDER        reduce using rule 25 (variables -> IDENTIFICADOR .)
 
 
-state 89
+state 95
 
-    (27) comparacion -> valor comparador valor .
+    (29) comparacion -> valor comparador valor .
 
-    OPERADOR        reduce using rule 27 (comparacion -> valor comparador valor .)
-    AND             reduce using rule 27 (comparacion -> valor comparador valor .)
-    OR              reduce using rule 27 (comparacion -> valor comparador valor .)
-    PARENDER        reduce using rule 27 (comparacion -> valor comparador valor .)
+    OPERADOR        reduce using rule 29 (comparacion -> valor comparador valor .)
+    AND             reduce using rule 29 (comparacion -> valor comparador valor .)
+    OR              reduce using rule 29 (comparacion -> valor comparador valor .)
+    PARENDER        reduce using rule 29 (comparacion -> valor comparador valor .)
 
 
-state 90
+state 96
 
     (36) print -> PRINT PARENIZ valores PARENDER PUNTOCOMA .
 
     $end            reduce using rule 36 (print -> PRINT PARENIZ valores PARENDER PUNTOCOMA .)
 
 
-state 91
+state 97
 
     (50) funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 94
+    PUNTOCOMA       shift and go to state 101
 
 
-state 92
+state 98
 
-    (52) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER . PUNTOCOMA
+    (54) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 95
+    PUNTOCOMA       shift and go to state 102
 
 
-state 93
+state 99
+
+    (55) stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 103
+
+
+state 100
 
     (46) funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .
 
     $end            reduce using rule 46 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
 
 
-state 94
+state 101
 
     (50) funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA .
 
     $end            reduce using rule 50 (funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA .)
 
 
-state 95
+state 102
 
-    (52) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA .
+    (54) queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA .
 
-    $end            reduce using rule 52 (queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA .)
+    $end            reduce using rule 54 (queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA .)
+
+
+state 103
+
+    (55) stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA .
+
+    $end            reduce using rule 55 (stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA .)
 
