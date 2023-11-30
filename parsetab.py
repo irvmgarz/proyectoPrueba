@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ANDEQUAL ARRAY ASIGNACION ASIGNAR BOOLEAN CADENA CASE COMA COMENTARIO CORCHETEDER CORCHETEIZ CURRENT DECREMENTO DEQUEUE DIVISION DIVISIONENTERA DOSPUNTOS ECHO ELSE ELSEIF ENQUEUE ENTERO FLECHASIMPLE FLOTANTE FOR FUNCTION IDENTICO IDENTIFICADOR IF IGUAL INCREMENTO LLAVEDER LLAVEIZ MAYORIGUALQUE MAYORQUE MENORIGUALQUE MENORQUE MODULO MULT NAMEFUNCTION NEW NEXT NOIDENTICO OPERADOR OR PARENDER PARENIZ POP POTENCIA PRINT PUNTO PUNTOCOMA PUSH QUEUE RESTA RETURN REWIND SIGNOID SPLSTACK SUMA SWITCH VALID WHILEsentencias : asignacion\n                  | echo \n                  | funcion\n                  | while\n                  | print\n                  | operadorAritmetico\n                  | return \n                  | estructuras\n                  valores : valor\n            | valor COMA valoresNUMERO : ENTERO\n            | FLOTANTE\n  valor : NUMERO\n\t         | CADENA\n\t         | BOOLEAN\n             | IDENTIFICADOR\n\t comparadorNum : MAYORQUE\n\t\t\t\t\t| MAYORIGUALQUE\n\t\t\t\t\t| MENORQUE\n\t\t\t\t\t| MENORIGUALQUE\n\t comparador : IDENTICO\n\t\t\t\t\t| NOIDENTICO\n\t\t\t\t\t| IGUAL\n\t variables : NUMERO\n                  | IDENTIFICADOR\n     comparaciones : comparacion  \n\t\t\t\t\t | comparacion operadores comparaciones\n\t comparacion :  variables comparadorNum variables \n            | valor comparador valor \n\techo : ECHO valores PUNTOCOMA\n   while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ \n\toperadores : OPERADOR\n\t         | AND\n\t         | OR\n\tasignacion : IDENTIFICADOR ASIGNAR valorprint : PRINT PARENIZ valores PARENDER PUNTOCOMA\n        | PRINT valor PUNTOCOMAprint : PRINT PARENIZ PARENDER PUNTOCOMAoperadorAritmetico : SUMA\n\t\t\t\t\t\t  | RESTA\n\t\t\t\t\t\t  | MULT\n\t\t\t\t\t\t  | DIVISION\n              | DIVISIONENTERA\n\t\t\t\t\t\t  | MODULO\n\t\t\t\t\t\t  | POTENCIA\n\tfuncion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZparametro : IDENTIFICADOR\n                | IDENTIFICADOR COMA parametro\n funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA\n                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA\n return : RETURN IDENTIFICADOR PUNTOCOMAestructuras : queue\n                  | stack queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'
+_lr_signature = 'AND ANDEQUAL ARRAY ASIGNACION ASIGNAR BOOLEAN CADENA CASE COMA COMENTARIO CORCHETEDER CORCHETEIZ CURRENT DECREMENTO DEQUEUE DIVISION DIVISIONENTERA DOSPUNTOS ECHO ELSE ELSEIF ENQUEUE ENTERO FLECHASIMPLE FLOTANTE FOR FUNCTION IDENTICO IDENTIFICADOR IF IGUAL INCREMENTO LLAVEDER LLAVEIZ MAYORIGUALQUE MAYORQUE MENORIGUALQUE MENORQUE MODULO MULT NAMEFUNCTION NEW NEXT NOIDENTICO OPERADOR OR PARENDER PARENIZ POP POTENCIA PRINT PUNTO PUNTOCOMA PUSH QUEUE RESTA RETURN REWIND SIGNOID SPLSTACK SUMA SWITCH VALID WHILEsentencias : asignacion\n                  | echo \n                  | funcion\n                  | print\n                  | operadorAritmetico\n                  | return \n                  | estructuras\n                  | estructurasControl\n                  valores : valor\n            | valor COMA valoresNUMERO : ENTERO\n            | FLOTANTE\n  valor : NUMERO\n\t         | CADENA\n\t         | BOOLEAN\n             | IDENTIFICADOR\n\t comparadorNum : MAYORQUE\n\t\t\t\t\t| MAYORIGUALQUE\n\t\t\t\t\t| MENORQUE\n\t\t\t\t\t| MENORIGUALQUE\n\t comparador : IDENTICO\n\t\t\t\t\t| NOIDENTICO\n\t\t\t\t\t| IGUAL\n\t variables : NUMERO\n                  | IDENTIFICADOR\n     comparaciones : comparacion  \n\t\t\t\t\t | comparacion operadores comparaciones\n\t comparacion :  variables comparadorNum variables \n            | valor comparador valor \n\tincrementoDecremento : INCREMENTO\n                          | DECREMENTO\n                          | SUMA ENTERO\n                          | RESTA ENTERO\n   while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ \n\t for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ\n   if : IF PARENIZ comparaciones PARENDER LLAVEIZ\n          | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ \n  operadores : OPERADOR\n\t         | AND\n\t         | OR\n\tasignacion : IDENTIFICADOR ASIGNAR valorprint : PRINT PARENIZ valores PARENDER PUNTOCOMA\n        | PRINT valor PUNTOCOMAprint : PRINT PARENIZ PARENDER PUNTOCOMAecho : ECHO valores PUNTOCOMA\n  operadorAritmetico : SUMA\n\t\t\t\t\t\t  | RESTA\n\t\t\t\t\t\t  | MULT\n\t\t\t\t\t\t  | DIVISION\n              | DIVISIONENTERA\n\t\t\t\t\t\t  | MODULO\n\t\t\t\t\t\t  | POTENCIA\n\tfuncion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZparametro : IDENTIFICADOR\n                | IDENTIFICADOR COMA parametro\n funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA\n                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA\n return : RETURN IDENTIFICADOR PUNTOCOMAestructuras : queue\n                  | stack\n                  | array\n                  estructurasControl : while\n                        | for\n                        | if\n   queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA array : IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA\n            | IDENTIFICADOR ASIGNAR CORCHETEIZ valores CORCHETEDER PUNTOCOMA\n  '
     
-_lr_action_items = {'IDENTIFICADOR':([0,11,15,23,26,37,38,39,47,48,61,63,67,69,70,71,72,73,74,75,76,77,78,79,80,81,],[10,33,33,41,33,50,56,33,33,50,50,33,50,56,-32,-33,-34,94,-17,-18,-19,-20,33,-21,-22,-23,]),'ECHO':([0,],[11,]),'FUNCTION':([0,],[12,]),'NAMEFUNCTION':([0,12,26,],[13,36,43,]),'WHILE':([0,],[14,]),'PRINT':([0,],[15,]),'SUMA':([0,],[16,]),'RESTA':([0,],[17,]),'MULT':([0,],[18,]),'DIVISION':([0,],[19,]),'DIVISIONENTERA':([0,],[20,]),'MODULO':([0,],[21,]),'POTENCIA':([0,],[22,]),'RETURN':([0,],[23,]),'$end':([1,2,3,4,5,6,7,8,9,16,17,18,19,20,21,22,24,25,30,31,32,33,34,35,42,46,59,60,83,88,90,96,100,101,102,103,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-39,-40,-41,-42,-43,-44,-45,-52,-53,-13,-14,-15,-16,-11,-12,-35,-30,-37,-51,-38,-49,-31,-36,-46,-50,-54,-55,]),'ASIGNAR':([10,],[26,]),'FLECHASIMPLE':([10,],[27,]),'CADENA':([11,15,26,38,39,47,63,69,70,71,72,78,79,80,81,],[31,31,31,31,31,31,31,31,-32,-33,-34,31,-21,-22,-23,]),'BOOLEAN':([11,15,26,38,39,47,63,69,70,71,72,78,79,80,81,],[32,32,32,32,32,32,32,32,-32,-33,-34,32,-21,-22,-23,]),'ENTERO':([11,15,26,38,39,47,63,69,70,71,72,73,74,75,76,77,78,79,80,81,],[34,34,34,34,34,34,34,34,-32,-33,-34,34,-17,-18,-19,-20,34,-21,-22,-23,]),'FLOTANTE':([11,15,26,38,39,47,63,69,70,71,72,73,74,75,76,77,78,79,80,81,],[35,35,35,35,35,35,35,35,-32,-33,-34,35,-17,-18,-19,-20,35,-21,-22,-23,]),'PARENIZ':([13,14,15,36,43,45,62,],[37,38,39,48,61,63,85,]),'NEW':([26,],[44,]),'PUSH':([27,],[45,]),'PUNTOCOMA':([28,29,30,31,32,33,34,35,40,41,58,64,66,82,97,98,99,],[46,-9,-13,-14,-15,-16,-11,-12,59,60,83,-10,88,96,101,102,103,]),'PARENDER':([29,30,31,32,33,34,35,39,49,50,51,52,57,64,65,84,85,86,89,91,92,93,94,95,],[-9,-13,-14,-15,-16,-11,-12,58,66,-47,68,-26,82,-10,87,97,98,99,-48,-27,-28,-24,-25,-29,]),'COMA':([29,30,31,32,33,34,35,50,],[47,-13,-14,-15,-16,-11,-12,67,]),'OPERADOR':([30,31,32,33,34,35,52,92,93,94,95,],[-13,-14,-15,-16,-11,-12,70,-28,-24,-25,-29,]),'AND':([30,31,32,33,34,35,52,92,93,94,95,],[-13,-14,-15,-16,-11,-12,71,-28,-24,-25,-29,]),'OR':([30,31,32,33,34,35,52,92,93,94,95,],[-13,-14,-15,-16,-11,-12,72,-28,-24,-25,-29,]),'IDENTICO':([31,32,34,35,54,55,56,],[-14,-15,-11,-12,79,-13,-16,]),'NOIDENTICO':([31,32,34,35,54,55,56,],[-14,-15,-11,-12,80,-13,-16,]),'IGUAL':([31,32,34,35,54,55,56,],[-14,-15,-11,-12,81,-13,-16,]),'MAYORQUE':([34,35,53,55,56,],[-11,-12,74,-24,-25,]),'MAYORIGUALQUE':([34,35,53,55,56,],[-11,-12,75,-24,-25,]),'MENORQUE':([34,35,53,55,56,],[-11,-12,76,-24,-25,]),'MENORIGUALQUE':([34,35,53,55,56,],[-11,-12,77,-24,-25,]),'QUEUE':([44,],[62,]),'LLAVEIZ':([68,87,],[90,100,]),}
+_lr_action_items = {'IDENTIFICADOR':([0,11,14,22,32,43,44,47,48,49,54,57,58,74,76,78,82,86,87,88,89,90,91,92,93,94,95,96,97,98,126,134,],[10,39,39,46,39,60,39,70,71,73,39,39,60,60,39,39,60,70,-38,-39,-40,115,-17,-18,-19,-20,39,-21,-22,-23,131,135,]),'ECHO':([0,],[11,]),'FUNCTION':([0,],[12,]),'NAMEFUNCTION':([0,12,32,],[13,42,51,]),'PRINT':([0,],[14,]),'SUMA':([0,135,],[15,139,]),'RESTA':([0,135,],[16,140,]),'MULT':([0,],[17,]),'DIVISION':([0,],[18,]),'DIVISIONENTERA':([0,],[19,]),'MODULO':([0,],[20,]),'POTENCIA':([0,],[21,]),'RETURN':([0,],[22,]),'WHILE':([0,],[29,]),'FOR':([0,],[30,]),'IF':([0,],[31,]),'$end':([1,2,3,4,5,6,7,8,9,15,16,17,18,19,20,21,23,24,25,26,27,28,36,37,38,39,40,41,50,56,63,64,84,108,110,111,118,119,123,125,127,128,129,130,144,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-46,-47,-48,-49,-50,-51,-52,-59,-60,-61,-62,-63,-64,-13,-14,-15,-16,-11,-12,-41,-45,-43,-58,-44,-56,-42,-34,-36,-37,-68,-53,-57,-65,-67,-66,-35,]),'ASIGNAR':([10,71,],[32,99,]),'FLECHASIMPLE':([10,],[33,]),'CADENA':([11,14,32,44,47,49,54,57,76,78,86,87,88,89,95,96,97,98,],[37,37,37,37,37,37,37,37,37,37,37,-38,-39,-40,37,-21,-22,-23,]),'BOOLEAN':([11,14,32,44,47,49,54,57,76,78,86,87,88,89,95,96,97,98,],[38,38,38,38,38,38,38,38,38,38,38,-38,-39,-40,38,-21,-22,-23,]),'ENTERO':([11,14,32,44,47,49,54,57,76,78,86,87,88,89,90,91,92,93,94,95,96,97,98,99,132,139,140,],[40,40,40,40,40,40,40,40,40,40,40,-38,-39,-40,40,-17,-18,-19,-20,40,-21,-22,-23,117,133,142,143,]),'FLOTANTE':([11,14,32,44,47,49,54,57,76,78,86,87,88,89,90,91,92,93,94,95,96,97,98,],[41,41,41,41,41,41,41,41,41,41,41,-38,-39,-40,41,-17,-18,-19,-20,41,-21,-22,-23,]),'PARENIZ':([13,14,29,30,31,42,51,53,55,75,],[43,44,47,48,49,58,74,76,78,103,]),'NEW':([32,],[52,]),'ARRAY':([32,],[53,]),'CORCHETEIZ':([32,],[54,]),'PUSH':([33,],[55,]),'PUNTOCOMA':([34,35,36,37,38,39,40,41,45,46,62,79,81,83,105,117,120,121,122,124,133,],[56,-9,-13,-14,-15,-16,-11,-12,63,64,84,-10,108,110,123,126,127,128,129,130,134,]),'PARENDER':([35,36,37,38,39,40,41,44,59,60,61,65,66,72,73,79,80,102,103,104,106,109,112,113,114,115,116,136,137,138,142,143,],[-9,-13,-14,-15,-16,-11,-12,62,81,-54,83,85,-26,100,101,-10,107,120,121,122,124,-55,-27,-28,-24,-25,-29,141,-30,-31,-32,-33,]),'CORCHETEDER':([35,36,37,38,39,40,41,77,79,],[-9,-13,-14,-15,-16,-11,-12,105,-10,]),'COMA':([35,36,37,38,39,40,41,60,],[57,-13,-14,-15,-16,-11,-12,82,]),'OPERADOR':([36,37,38,39,40,41,66,113,114,115,116,],[-13,-14,-15,-16,-11,-12,87,-28,-24,-25,-29,]),'AND':([36,37,38,39,40,41,66,113,114,115,116,],[-13,-14,-15,-16,-11,-12,88,-28,-24,-25,-29,]),'OR':([36,37,38,39,40,41,66,113,114,115,116,],[-13,-14,-15,-16,-11,-12,89,-28,-24,-25,-29,]),'IDENTICO':([37,38,40,41,68,69,70,73,],[-14,-15,-11,-12,96,-13,-16,-16,]),'NOIDENTICO':([37,38,40,41,68,69,70,73,],[-14,-15,-11,-12,97,-13,-16,-16,]),'IGUAL':([37,38,40,41,68,69,70,73,],[-14,-15,-11,-12,98,-13,-16,-16,]),'MAYORQUE':([40,41,67,69,70,73,131,],[-11,-12,91,-24,-25,-25,91,]),'MAYORIGUALQUE':([40,41,67,69,70,73,131,],[-11,-12,92,-24,-25,-25,92,]),'MENORQUE':([40,41,67,69,70,73,131,],[-11,-12,93,-24,-25,-25,93,]),'MENORIGUALQUE':([40,41,67,69,70,73,131,],[-11,-12,94,-24,-25,-25,94,]),'QUEUE':([52,],[75,]),'LLAVEIZ':([85,100,101,107,141,],[111,118,119,125,144,]),'INCREMENTO':([135,],[137,]),'DECREMENTO':([135,],[138,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'sentencias':([0,],[1,]),'asignacion':([0,],[2,]),'echo':([0,],[3,]),'funcion':([0,],[4,]),'while':([0,],[5,]),'print':([0,],[6,]),'operadorAritmetico':([0,],[7,]),'return':([0,],[8,]),'estructuras':([0,],[9,]),'queue':([0,],[24,]),'stack':([0,],[25,]),'valores':([11,39,47,],[28,57,64,]),'valor':([11,15,26,38,39,47,63,69,78,],[29,40,42,54,29,29,86,54,95,]),'NUMERO':([11,15,26,38,39,47,63,69,73,78,],[30,30,30,55,30,30,30,55,93,30,]),'parametro':([37,48,61,67,],[49,65,84,89,]),'comparaciones':([38,69,],[51,91,]),'comparacion':([38,69,],[52,52,]),'variables':([38,69,73,],[53,53,92,]),'operadores':([52,],[69,]),'comparadorNum':([53,],[73,]),'comparador':([54,],[78,]),}
+_lr_goto_items = {'sentencias':([0,],[1,]),'asignacion':([0,],[2,]),'echo':([0,],[3,]),'funcion':([0,],[4,]),'print':([0,],[5,]),'operadorAritmetico':([0,],[6,]),'return':([0,],[7,]),'estructuras':([0,],[8,]),'estructurasControl':([0,],[9,]),'queue':([0,],[23,]),'stack':([0,],[24,]),'array':([0,],[25,]),'while':([0,],[26,]),'for':([0,],[27,]),'if':([0,],[28,]),'valores':([11,44,54,57,76,],[34,61,77,79,104,]),'valor':([11,14,32,44,47,49,54,57,76,78,86,95,],[35,45,50,35,68,68,35,35,35,106,68,116,]),'NUMERO':([11,14,32,44,47,49,54,57,76,78,86,90,95,],[36,36,36,36,69,69,36,36,36,36,69,114,36,]),'parametro':([43,58,74,82,],[59,80,102,109,]),'comparaciones':([47,49,86,],[65,72,112,]),'comparacion':([47,49,86,],[66,66,66,]),'variables':([47,49,86,90,],[67,67,67,113,]),'operadores':([66,],[86,]),'comparadorNum':([67,131,],[90,132,]),'comparador':([68,],[95,]),'incrementoDecremento':([135,],[136,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -30,11 +30,11 @@ _lr_productions = [
   ('sentencias -> asignacion','sentencias',1,'p_sentencias','parserphp.py',8),
   ('sentencias -> echo','sentencias',1,'p_sentencias','parserphp.py',9),
   ('sentencias -> funcion','sentencias',1,'p_sentencias','parserphp.py',10),
-  ('sentencias -> while','sentencias',1,'p_sentencias','parserphp.py',11),
-  ('sentencias -> print','sentencias',1,'p_sentencias','parserphp.py',12),
-  ('sentencias -> operadorAritmetico','sentencias',1,'p_sentencias','parserphp.py',13),
-  ('sentencias -> return','sentencias',1,'p_sentencias','parserphp.py',14),
-  ('sentencias -> estructuras','sentencias',1,'p_sentencias','parserphp.py',15),
+  ('sentencias -> print','sentencias',1,'p_sentencias','parserphp.py',11),
+  ('sentencias -> operadorAritmetico','sentencias',1,'p_sentencias','parserphp.py',12),
+  ('sentencias -> return','sentencias',1,'p_sentencias','parserphp.py',13),
+  ('sentencias -> estructuras','sentencias',1,'p_sentencias','parserphp.py',14),
+  ('sentencias -> estructurasControl','sentencias',1,'p_sentencias','parserphp.py',15),
   ('valores -> valor','valores',1,'p_valores','parserphp.py',19),
   ('valores -> valor COMA valores','valores',3,'p_valores','parserphp.py',20),
   ('NUMERO -> ENTERO','NUMERO',1,'p_numero','parserphp.py',23),
@@ -56,30 +56,43 @@ _lr_productions = [
   ('comparaciones -> comparacion operadores comparaciones','comparaciones',3,'p_comparaciones','parserphp.py',51),
   ('comparacion -> variables comparadorNum variables','comparacion',3,'p_comparacion','parserphp.py',55),
   ('comparacion -> valor comparador valor','comparacion',3,'p_comparacion','parserphp.py',56),
-  ('echo -> ECHO valores PUNTOCOMA','echo',3,'p_echo','parserphp.py',61),
-  ('while -> WHILE PARENIZ comparaciones PARENDER LLAVEIZ','while',5,'p_while','parserphp.py',66),
-  ('operadores -> OPERADOR','operadores',1,'p_operadores','parserphp.py',70),
-  ('operadores -> AND','operadores',1,'p_operadores','parserphp.py',71),
-  ('operadores -> OR','operadores',1,'p_operadores','parserphp.py',72),
-  ('asignacion -> IDENTIFICADOR ASIGNAR valor','asignacion',3,'p_asignacion','parserphp.py',78),
-  ('print -> PRINT PARENIZ valores PARENDER PUNTOCOMA','print',5,'p_print','parserphp.py',82),
-  ('print -> PRINT valor PUNTOCOMA','print',3,'p_print','parserphp.py',83),
-  ('print -> PRINT PARENIZ PARENDER PUNTOCOMA','print',4,'p_print_sinvalor','parserphp.py',86),
-  ('operadorAritmetico -> SUMA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',92),
-  ('operadorAritmetico -> RESTA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',93),
-  ('operadorAritmetico -> MULT','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',94),
-  ('operadorAritmetico -> DIVISION','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',95),
-  ('operadorAritmetico -> DIVISIONENTERA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',96),
-  ('operadorAritmetico -> MODULO','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',97),
-  ('operadorAritmetico -> POTENCIA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',98),
-  ('funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ','funcion',6,'p_declaracion_funcion','parserphp.py',106),
-  ('parametro -> IDENTIFICADOR','parametro',1,'p_parametro','parserphp.py',112),
-  ('parametro -> IDENTIFICADOR COMA parametro','parametro',3,'p_parametro','parserphp.py',113),
-  ('funcion -> NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA','funcion',5,'p_llamada_funcion','parserphp.py',118),
-  ('funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA','funcion',7,'p_llamada_funcion','parserphp.py',119),
-  ('return -> RETURN IDENTIFICADOR PUNTOCOMA','return',3,'p_return','parserphp.py',124),
-  ('estructuras -> queue','estructuras',1,'p_estructuras','parserphp.py',135),
-  ('estructuras -> stack','estructuras',1,'p_estructuras','parserphp.py',136),
-  ('queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA','queue',7,'p_queue','parserphp.py',139),
-  ('stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA','stack',7,'p_stack','parserphp.py',142),
+  ('incrementoDecremento -> INCREMENTO','incrementoDecremento',1,'p_incrementoDecremento','parserphp.py',60),
+  ('incrementoDecremento -> DECREMENTO','incrementoDecremento',1,'p_incrementoDecremento','parserphp.py',61),
+  ('incrementoDecremento -> SUMA ENTERO','incrementoDecremento',2,'p_incrementoDecremento','parserphp.py',62),
+  ('incrementoDecremento -> RESTA ENTERO','incrementoDecremento',2,'p_incrementoDecremento','parserphp.py',63),
+  ('while -> WHILE PARENIZ comparaciones PARENDER LLAVEIZ','while',5,'p_while','parserphp.py',68),
+  ('for -> FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ','for',14,'p_for','parserphp.py',72),
+  ('if -> IF PARENIZ comparaciones PARENDER LLAVEIZ','if',5,'p_if','parserphp.py',77),
+  ('if -> IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ','if',5,'p_if','parserphp.py',78),
+  ('operadores -> OPERADOR','operadores',1,'p_operadores','parserphp.py',84),
+  ('operadores -> AND','operadores',1,'p_operadores','parserphp.py',85),
+  ('operadores -> OR','operadores',1,'p_operadores','parserphp.py',86),
+  ('asignacion -> IDENTIFICADOR ASIGNAR valor','asignacion',3,'p_asignacion','parserphp.py',92),
+  ('print -> PRINT PARENIZ valores PARENDER PUNTOCOMA','print',5,'p_print','parserphp.py',96),
+  ('print -> PRINT valor PUNTOCOMA','print',3,'p_print','parserphp.py',97),
+  ('print -> PRINT PARENIZ PARENDER PUNTOCOMA','print',4,'p_print_sinvalor','parserphp.py',100),
+  ('echo -> ECHO valores PUNTOCOMA','echo',3,'p_echo','parserphp.py',103),
+  ('operadorAritmetico -> SUMA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',109),
+  ('operadorAritmetico -> RESTA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',110),
+  ('operadorAritmetico -> MULT','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',111),
+  ('operadorAritmetico -> DIVISION','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',112),
+  ('operadorAritmetico -> DIVISIONENTERA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',113),
+  ('operadorAritmetico -> MODULO','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',114),
+  ('operadorAritmetico -> POTENCIA','operadorAritmetico',1,'p_operadorAritmetico','parserphp.py',115),
+  ('funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ','funcion',6,'p_declaracion_funcion','parserphp.py',123),
+  ('parametro -> IDENTIFICADOR','parametro',1,'p_parametro','parserphp.py',129),
+  ('parametro -> IDENTIFICADOR COMA parametro','parametro',3,'p_parametro','parserphp.py',130),
+  ('funcion -> NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA','funcion',5,'p_llamada_funcion','parserphp.py',135),
+  ('funcion -> IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA','funcion',7,'p_llamada_funcion','parserphp.py',136),
+  ('return -> RETURN IDENTIFICADOR PUNTOCOMA','return',3,'p_return','parserphp.py',141),
+  ('estructuras -> queue','estructuras',1,'p_estructuras','parserphp.py',152),
+  ('estructuras -> stack','estructuras',1,'p_estructuras','parserphp.py',153),
+  ('estructuras -> array','estructuras',1,'p_estructuras','parserphp.py',154),
+  ('estructurasControl -> while','estructurasControl',1,'p_estructurasControl','parserphp.py',158),
+  ('estructurasControl -> for','estructurasControl',1,'p_estructurasControl','parserphp.py',159),
+  ('estructurasControl -> if','estructurasControl',1,'p_estructurasControl','parserphp.py',160),
+  ('queue -> IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA','queue',7,'p_queue','parserphp.py',164),
+  ('stack -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA','stack',7,'p_stack','parserphp.py',167),
+  ('array -> IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA','array',7,'p_array','parserphp.py',171),
+  ('array -> IDENTIFICADOR ASIGNAR CORCHETEIZ valores CORCHETEDER PUNTOCOMA','array',6,'p_array','parserphp.py',172),
 ]

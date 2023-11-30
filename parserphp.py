@@ -8,11 +8,11 @@ def p_sentencias(p):
     '''sentencias : asignacion
                   | echo 
                   | funcion
-                  | while
                   | print
                   | operadorAritmetico
                   | return 
                   | estructuras
+                  | estructurasControl
                   '''
 
 def p_valores(p):
@@ -56,15 +56,29 @@ def p_comparacion(p):
             | valor comparador valor 
 	'''
 
-
-def p_echo(p):
-  '''echo : ECHO valores PUNTOCOMA
+def p_incrementoDecremento(p):
+  '''incrementoDecremento : INCREMENTO
+                          | DECREMENTO
+                          | SUMA ENTERO
+                          | RESTA ENTERO
   '''
 
 # FALTA ARGUMENTOOOOOOS
 def p_while(p):
 	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
 	'''
+
+def p_for(p):
+  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ
+  '''
+#for ($i = 2; $i <= 10; $i + 2) {
+
+def p_if(p):
+  ''' if : IF PARENIZ comparaciones PARENDER LLAVEIZ
+          | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
+  '''
+#if ($edad >= 18) {
+#if ($esAdmin) { 
 
 def p_operadores(p):
    '''operadores : OPERADOR
@@ -85,6 +99,9 @@ def p_print(p):
 def p_print_sinvalor(p):
   "print : PRINT PARENIZ PARENDER PUNTOCOMA"
 
+def p_echo(p):
+  '''echo : ECHO valores PUNTOCOMA
+  '''
 
 # Operaciones aritmeticas
 
@@ -133,7 +150,15 @@ def p_return(p):
 # $queue = new SplQueue(); 
 def p_estructuras(p):
   '''estructuras : queue
-                  | stack'''
+                  | stack
+                  | array
+                  '''
+
+def p_estructurasControl(p):
+  '''estructurasControl : while
+                        | for
+                        | if
+  '''
 
 def p_queue(p):
   " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
@@ -141,7 +166,13 @@ def p_queue(p):
 def p_stack(p):
   ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
 
-
+#ARRAY
+def p_array(p):
+  ''' array : IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA
+            | IDENTIFICADOR ASIGNAR CORCHETEIZ valores CORCHETEDER PUNTOCOMA
+  '''
+#$arrayNumerico = array(1, 2, 3, 4, 5);
+#$arrayNumerico = [1, 2, 3, 4, 5];
 
 #Fin de Diego Martinez
 
