@@ -91,6 +91,7 @@ def p_operadores(p):
 def p_asignacion(p):
     '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA'''
 
+#INICIO MEIYIN CHANG
 # Impresion
 def p_print(p):
   '''print : PRINT PARENIZ valores PARENDER PUNTOCOMA
@@ -103,6 +104,14 @@ def p_echo(p):
   '''echo : ECHO valores PUNTOCOMA
   '''
 
+# $stack->push("Deanna");
+def p_push(p):
+  ''' push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
+
+# $stack = new SplStack();
+def p_stack(p):
+  ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
+
 # Operaciones aritmeticas
 
 def p_operadorAritmetico(p):
@@ -114,6 +123,9 @@ def p_operadorAritmetico(p):
 						  | MODULO
 						  | POTENCIA
 	'''
+
+#FIN MEIYIN CHANG
+
 
 #Inicio Diego Martinez
 
@@ -165,13 +177,44 @@ def p_estructurasControl(p):
 def p_queue(p):
   " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
 
-# $stack->push("Deanna");
-def p_push(p):
-  ''' push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
 
-# $stack = new SplStack();
-def p_stack(p):
-  ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
+#Añadir elementos a la cola
+# $queue->enqueue('1');
+def p_colaAnadir(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE ENQUEUE PARENIZ valor PARENDER PUNTOCOMA"
+
+#Muestra el número de elementos de la cola(3)
+# $queue->count();
+def p_colaContar(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE COUNT PARENIZ PARENDER PUNTOCOMA"
+
+#Saca de la cola el primer elemento y lo muestra
+# $queue->dequeue();
+def p_colaExpulsar(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE DEQUEUE PARENIZ PARENDER PUNTOCOMA"
+
+#Avanzar
+# $queue->next();
+def p_colaSiguiente(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE NEXT PARENIZ PARENDER PUNTOCOMA"
+
+#Situa el puntero al principio de la cola
+# $queue->rewind();
+def p_colaPunteroPrincipio(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE REWIND PARENIZ PARENDER PUNTOCOMA"
+
+# Mostrar elemento actual de la cola
+# $queue->current();
+def p_colaActual(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE CURRENT PARENIZ PARENDER PUNTOCOMA"
+
+# Comprobar si en la cola aun hay elementos
+# $queue->valid()
+def p_colaValido(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
+
+
+
 
 
 #ARRAY
